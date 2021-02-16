@@ -2260,7 +2260,7 @@ let data = [
   },
 ];
 
-function allDa() {
+function loadData() {
   let div = document.querySelector(".cusDiv");
   let div2 = document.querySelector(".cusDiv2");
   // for loop for id
@@ -2280,39 +2280,27 @@ function allDa() {
   }
 }
 
-allDa();
+loadData();
 
-userInput = document.querySelector(".userInput");
+const userInput = document.querySelector(".userInput");
 
 userInput.addEventListener("keyup", function () {
-  let Userstr = userInput.value;
-  console.log(Userstr);
-  if (Userstr == ".") {
-    console.log("empty");
-    // let div1 = document.querySelector(".cusDiv");
-    // let div2 = document.querySelector(".cusDiv2");
-    // div1.innerHTML = "";
-    // div2.innerHTML = "";
-    allDa();
-  }
+  let searchFieldValue = userInput.value;
 
-  console.log(`user write =${Userstr}`);
 
+  console.log(`user write =${searchFieldValue}`);
+
+  let div1 = document.querySelector(".cusDiv");
+  let div2 = document.querySelector(".cusDiv2");
+  div1.innerHTML = "";
+  div2.innerHTML = "";
   for (let i of data) {
-    if (i.Name.includes(Userstr)) {
-      let renderName = i.Name;
-      let div = document.querySelector(".cusDiv");
-      let div2 = document.querySelector(".cusDiv2");
-      div.innerHTML = "";
-      div2.innerHTML = "";
+    const matches = i.Name.toLowerCase().includes(searchFieldValue.toLowerCase());
+    console.log({ matches })
+    if (matches) {
       let newDiv = document.createElement("div");
       newDiv.innerText = i.Name;
-      div.appendChild(newDiv);
-      //   for (let rN of renderName) {
-      //     let newDiv = document.createElement("div");
-      //     newDiv.innerText = i.Name;
-      //     div.appendChild(newDiv);
-      //   }
+      div1.appendChild(newDiv);
     }
   }
 });
